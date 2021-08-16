@@ -3,7 +3,7 @@
 // Author      : Nathan Chuluda
 // Version     : 1.0
 // Copyright   : Copyright © 2017 SNHU COCE
-// Description : Hello World in C++, Ansi-style
+// Description : Binary Search Tree Final Project
 //============================================================================
 
 #include <iostream>
