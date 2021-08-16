@@ -1,0 +1,166 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1671\cocoasubrtf600
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\fmodern\fcharset0 CourierNewPSMT;\f2\fmodern\fcharset0 CourierNewPS-BoldMT;
+}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww12440\viewh13320\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5605\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf2 Nathan Chuluda\
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5605\tx5760\tx6480\tx7200\tx7920\tx8640\pardeftab720\partightenfactor0
+\cf2 \cb3 \expnd0\expndtw0\kerning0
+CS-300-X6356 DSA: Analysis and Design 21EW6\
+Module 5 Assignment: Binary Search Trees\
+July 30, 2021\
+\
+Code Reflection:\
+\
+This code loads data from a CSV file storing each line as a Bid object within a Binary Search Tree data structure. Once the bids have been loaded, they can be printed to the console. It is possible to search for a specific bid and to remove a specific bid. This is my first experience working with BSTs, so it was a challenge to follow exactly how to move recursively through the data structure. Referencing the pseudocode in our ZyBooks material helped me understand the way the code should be structured. In particular, the code for printing from the BST was fascinating. The code is extremely simple, but the recursive calls to the methods took a while to digest.\
+\
+Pseudocode:\
+\
+Insert a bid\
+\
+
+\f1 void BinarySearchTree::Insert(Bid bid) \{\
+	if root is equal to nullptr\
+		root is equal to new Node(bid)\
+	else\
+		addNode(root, bid)\
+\}\
+\
+void BinarySearchTree::addNode(Node* node, Bid bid) \{\
+	\
+	if node bidId is larger than bid bidId\
+		// no left node\
+		if node left is equal to nullptr\
+			node left is equal to new Node(bid)\
+		else\
+			//recurse down left node \
+			addNode(node left, bid)\
+	else\
+		// no right node\
+		if node right is equal to nullptr\
+			node right is equal to new Node(bid)\
+		else\
+			//recurse down right node\
+			addNode(node right, bid)\
+\}\
+
+\f0 \
+\
+Remove a bid\
+\
+
+\f1 void BinarySearchTree::Remove(string bidId) \{\
+	removeNode(root, bidId)\
+\}\
+\
+void BinarySearchTree::removeNode(Node* node, string bidId) \{\
+	if node equals nullptr\
+		return node\
+	\
+	// recurse down left subtree\
+	if bidId less than node bidId\
+		node left equals removeNode(node left, bidId)\
+\
+	else \
+		//no children\
+		if node left equals nullptr AND node right equals nullptr\
+		delete node\
+		node equals nullptr\
+\
+		//one child to left \
+		else if node left not nullptr AND node right equals nullptr\
+			Node temp equals node\
+			node equals node left\
+			delete temp\
+\
+		//one child to right\
+		else if node right not nullptr AND node left equals nullptr\
+			Node temp equals node\
+			node equals node right\
+			delete temp\
+\
+		//two children\
+		else\
+			Node temp equals node right\
+			while temp left not nullptr\
+				temp equals temp left\
+\
+			node bid equals temp bid\
+			node right equals removeNode(node right, temp bidId)\
+\
+	return node\
+\}\
+
+\f0 \
+Search for a bid\
+\
+
+\f1 Bid BinarySearchTree::Search(string bidId) \{\
+	Set current node equal to root\
+\
+	while current does not equal nullptr\
+\
+		if match found\
+			return current bid\
+\
+		if bid is smaller than current bid\
+			traverse left\
+		\
+		else bid is larger than current bid\
+			traverse right\
+\
+	//bid not found\
+	return empty bid\
+\}
+\f0 \
+\
+Display all bids\
+\
+
+\f2\b // Display in order
+\f0\b0 \
+\
+
+\f1 void BinarySearchTree::InOrder() \{\
+	inOrder(root)\
+\}\
+\
+void BinarySearchTree:inOrder(Node* node) \{\
+	if node not nullptr\
+		inOrder(node left)\
+		print bidId title amount fund\
+		inOrder(node right)\
+\}\
+\
+
+\f2\b // Display in pre order
+\f1\b0 \
+\
+void BinarySearchTree::PreOrder() \{\
+	preOrder(root)\
+\}\
+\
+void BinarySearchTree::preOrder(Node* node) \{\
+	if node not nullptr\
+		print bidId title amount fund\
+		preOrder(node left)\
+		preOrder(node right)\
+\}\
+\
+
+\f2\b // Display in post order
+\f1\b0 \
+\
+void BinarySearchTree::PostOrder() \{\
+	postOrder(root)\
+\}\
+\
+void BinarySearchTree::postOrder(Node* node) \{\
+	if node not nullptr\
+		postOrder(node left)\
+		postOrder(node right)\
+		print bidId title amount fund\
+\}}
